@@ -12,13 +12,14 @@ from PyQt6.QtWidgets import (
     QMainWindow,
     QPushButton,
     QWidget,
+    QComboBox
 )
 
 T = TypeVar("T")
 
 
 class Board(Generic[T]):
-    def __init__(self, values_in_correct_order: list[T], blank_item: T) -> None:
+    def __init__(self, blank_item: T, values_in_correct_order: list[T]) -> None:
         # `values_in_correct_order` is a list with items
         # of the same time, for example, QPixmap.
         self.values = values_in_correct_order.copy()
@@ -27,6 +28,7 @@ class Board(Generic[T]):
         random.shuffle(self.positions)
 
     def render(self) -> Iterable[T]:
+        # return QPixmap object from shuffled positions list
         for pos in self.positions:
             yield self.values[pos]
 
@@ -69,7 +71,7 @@ class Board(Generic[T]):
 
 
 class MainWindow(QMainWindow):
-    def __init__(self, images: list[str]):  # The first image should be the blank one.
+    def __init__(self):  # The first image should be the blank one.
         super().__init__()
 
         self.setWindowTitle("Puzzle Game")
@@ -101,7 +103,9 @@ class MainWindow(QMainWindow):
         grid_layout.addWidget(self.time_label, 4, 2)
         self.timer = QTimer()
 
-        self.image_widgets = [QPixmap(image) for image in images]
+        self.combo_menu = QComboBox()
+        self.combo_menu.addItems(['Flower', 'MulledWine', 'Test'])
+        grid_layout.addWidget(self.combo_menu, 4, 3)
 
     def init_timer(self):
         time = QTime(0, 0, 0)
@@ -115,11 +119,28 @@ class MainWindow(QMainWindow):
         self.timer.start(1000)
 
     def render_icons(self):
+        # self.tiles is just QPushButton list
+        # self.board.render() return position from shuffled positions list
         for image_widget, tile in zip(self.board.render(), self.tiles):
+            # Every tile get its own QIcon with right image_widget
             tile.setIcon(QIcon(image_widget))
 
+    def set_picture(self):
+        picture = self.combo_menu.currentText()
+        folder = "./Source/Images/" + picture
+
+        images = [
+            os.path.join(folder, f) for f in os.listdir(folder) if f.startswith("ImageP")
+        ]
+        images.sort(key=lambda x: int(x.split('ImageP')[1].split(".")[0]))
+
+        self.image_widgets = [QPixmap(image) for image in images]
+
     def init_tiles(self):
-        self.board = Board(self.image_widgets[0:15], self.image_widgets[15])
+        self.set_picture()
+
+        # image_widgets is list with sorted QPixmap images
+        self.board = Board(self.image_widgets[0], self.image_widgets[1:])
         self.render_icons()
 
         for i, tile in enumerate(self.tiles):
@@ -155,13 +176,8 @@ class MainWindow(QMainWindow):
 
 
 def main():
-    folder = "./Source"
-    images = [
-        os.path.join(folder, f) for f in os.listdir(folder) if f.startswith("ImageP")
-    ]
-
     app = QApplication(sys.argv)
-    game = MainWindow(images)
+    game = MainWindow()
     game.show()
     return app.exec()
 
