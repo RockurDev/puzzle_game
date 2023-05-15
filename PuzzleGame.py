@@ -104,7 +104,7 @@ class MainWindow(QMainWindow):
         self.timer = QTimer()
 
         self.combo_menu = QComboBox()
-        self.combo_menu.addItems(['Flower', 'MulledWine', 'Test'])
+        self.combo_menu.addItems(['Flower', 'MulledWine', 'Panda', 'Moscow', 'Morgenshtern'])
         grid_layout.addWidget(self.combo_menu, 4, 3)
 
     def init_timer(self):
