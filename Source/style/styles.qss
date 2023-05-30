@@ -1,0 +1,53 @@
+QWidget{
+    background-color: #ECECE2;
+}
+QPushButton{
+	border-style: solid;
+	border-color: #050a0e;
+	border-width: 1px;
+	border-radius: 5px;
+	color: #423930;
+	padding: 2px;
+	background-color: #DADEDF;
+}
+QPushButton::default{
+	border-style: solid;
+	border-color: #050a0e;
+	border-width: 1px;
+	border-radius: 5px;
+	color: #756C63;
+	padding: 2px;
+	background-color: #556672;
+}
+QPushButton:hover{
+	border-style: solid;
+	border-width: 2px;
+    border-radius: 5px;
+    color: #DADEDF;
+	background-color: #556672;
+	padding: 2px;
+}
+QPushButton:pressed{
+	border-style: solid;
+	border-width: 2px;
+    border-radius: 5px;
+    color: #ECECE2;
+	background-color: #6b818d;
+	padding: 2px;
+}
+QComboBox{
+    border-style: solid;
+	border-width: 1px;
+    border-radius: 5px;
+    color: #423930;
+	background-color: #DADEDF;
+	padding: 2px;
+}
+QComboBox::hover{
+    border-style: solid;
+	border-width: 1px;
+    border-radius: 5px;
+    color: #DADEDF;
+	background-color: #556672;
+	padding: 2px;
+}
