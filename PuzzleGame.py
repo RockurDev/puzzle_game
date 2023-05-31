@@ -19,7 +19,6 @@ from PyQt6.QtWidgets import (
 T = TypeVar("T")
 
 # Define a class to represent the game board
-
 class Board(Generic[T]):
     def __init__(self, blank_item: T, values_in_correct_order: list[T]) -> None:
         # `values_in_correct_order` is a list with items
@@ -38,7 +37,6 @@ class Board(Generic[T]):
             yield self.values[pos]
 
     def check_win(self) -> bool:
-        
         return self.positions == list(range(16))
 
     def _swap_tiles(self, first_pos: int, second_pos: int) -> None:
@@ -117,7 +115,7 @@ class MainWindow(QMainWindow):
 
         # Create a combo menu for selecting the image for the game
         self.combo_menu = QComboBox()
-        self.combo_menu.addItems(['Flower', 'Morgenshtern', 'Moscow', 'MulledWine', 'Panda', 'Witcher'])
+        self.combo_menu.addItems(['AirBallon', 'Amsterdam', 'Flower', 'Moscow', 'MulledWine', 'Panda', 'Toucan', 'Witcher'])
         grid_layout.addWidget(self.combo_menu, 4, 3)
 
     def init_timer(self):
