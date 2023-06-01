@@ -2,7 +2,6 @@ import os
 import random
 import sys
 from typing import Generic, Iterable, TypeVar
-
 from PyQt6.QtCore import QSize, QTime, QTimer
 from PyQt6.QtGui import QFont, QIcon, QPixmap
 from PyQt6.QtWidgets import (
@@ -85,6 +84,7 @@ class MainWindow(QMainWindow):
         # Set the window title, size, and layout
         self.setWindowTitle("Puzzle Game")
         self.setGeometry(100, 100, 500, 500)
+        self.setFixedSize(470, 550)
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         grid_layout = QGridLayout(central_widget)
@@ -160,7 +160,7 @@ class MainWindow(QMainWindow):
         self.render_icons()
 
         for i, tile in enumerate(self.tiles):
-            tile.setIconSize(QSize(100, 100))
+            tile.setIconSize(QSize(110, 110))
             tile.clicked.connect(lambda _, i=i: self.move_tile(i))
             tile.setEnabled(True)
 
@@ -196,7 +196,11 @@ class MainWindow(QMainWindow):
 
 # Define the main function to create and run the game window
 def main():
+    # The style sheet is loaded
+    with open('./Source/Style/styles.qss', 'r') as f:
+        style = f.read()
     app = QApplication(sys.argv)
+    app.setStyleSheet(style)
     game = MainWindow()
     game.show()
     return app.exec()
