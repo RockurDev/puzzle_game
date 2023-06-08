@@ -51,3 +51,6 @@ QComboBox::hover{
 	background-color: #556672;
 	padding: 2px;
 }
+QLabel{
+    color: #423930;
+}
