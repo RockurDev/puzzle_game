@@ -11,11 +11,12 @@ from PyQt6.QtWidgets import (
     QMainWindow,
     QPushButton,
     QWidget,
-    QComboBox
+    QComboBox,
 )
 
 # Define a type variable T for the Board class
 T = TypeVar("T")
+
 
 # Define a class to represent the game board
 class Board(Generic[T]):
@@ -53,15 +54,13 @@ class Board(Generic[T]):
 
         if first_column == second_column and (
             # lower or upper
-            first_row == second_row - 1
-            or first_row == second_row + 1
+            first_row == second_row - 1 or first_row == second_row + 1
         ):
             return True
 
         if first_row == second_row and (
             # to the left or to the right
-            first_column == second_column - 1
-            or first_column == second_column + 1
+            first_column == second_column - 1 or first_column == second_column + 1
         ):
             return True
 
@@ -115,7 +114,18 @@ class MainWindow(QMainWindow):
 
         # Create a combo menu for selecting the image for the game
         self.combo_menu = QComboBox()
-        self.combo_menu.addItems(['AirBallon', 'Amsterdam', 'Flower', 'Moscow', 'MulledWine', 'Panda', 'Toucan', 'Witcher'])
+        self.combo_menu.addItems(
+            [
+                "AirBallon",
+                "Amsterdam",
+                "Flower",
+                "Moscow",
+                "MulledWine",
+                "Panda",
+                "Toucan",
+                "Witcher",
+            ]
+        )
         grid_layout.addWidget(self.combo_menu, 4, 3)
 
     def init_timer(self):
@@ -144,9 +154,11 @@ class MainWindow(QMainWindow):
         folder = "./Source/Images/" + picture
 
         images = [
-            os.path.join(folder, f) for f in os.listdir(folder) if f.startswith("ImageP")
+            os.path.join(folder, f)
+            for f in os.listdir(folder)
+            if f.startswith("ImageP")
         ]
-        images.sort(key=lambda x: int(x.split('ImageP')[1].split(".")[0]))
+        images.sort(key=lambda x: int(x.split("ImageP")[1].split(".")[0]))
 
         # Create a list of QPixmap images for the tiles on the board
         self.image_widgets = [QPixmap(image) for image in images]
@@ -197,13 +209,14 @@ class MainWindow(QMainWindow):
 # Define the main function to create and run the game window
 def main():
     # The style sheet is loaded
-    with open('./Source/Style/styles.qss', 'r') as f:
+    with open("./Source/Style/styles.qss", "r") as f:
         style = f.read()
     app = QApplication(sys.argv)
     app.setStyleSheet(style)
     game = MainWindow()
     game.show()
     return app.exec()
+
 
 # Run the main function when this script is called
 if __name__ == "__main__":
