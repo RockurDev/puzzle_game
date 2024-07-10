@@ -48,5 +48,3 @@ Contributions are welcome! If you want to contribute, please fork the repository
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
-
-Make sure to replace <repository-url> and <repository-folder> with your actual repository URL and folder name. This README.md provides an overview of your application, instructions for installation and usage, as well as information on how to contribute and the license under which the project is distributed. Adjust any specific details or additional features according to your project's specific needs.
