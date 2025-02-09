@@ -1,4 +1,4 @@
-# PyQt6 Puzzle Game
+# Puzzle Game
 
 This PyQt6 application implements a classic sliding puzzle game. It allows players to choose from various images and rearrange shuffled tiles to recreate the original image.
 
@@ -12,8 +12,8 @@ This PyQt6 application implements a classic sliding puzzle game. It allows playe
 
 ## Requirements
 
-- Python 3.x
-- PyQt6 library
+- Python 3
+- PyQt6
 
 ## Installation
 
@@ -44,7 +44,3 @@ This PyQt6 application implements a classic sliding puzzle game. It allows playe
 ## Contributing
 
 Contributions are welcome! If you want to contribute, please fork the repository and create a pull request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
